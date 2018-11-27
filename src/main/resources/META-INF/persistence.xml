@@ -4,7 +4,7 @@
 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <persistence-unit name="contestsUnit">
+    <persistence-unit name="dbUnit">
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/contestsdb"/>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/contestsdb?useUnicode=yes&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false"/>-->
@@ -16,7 +16,8 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
             <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
-            <!--<property name="javax.persistence.sql-load-script-source" value="META-INF/sql/data.sql"/>--> <!-- skryp startowy -->
+            <!--<property name="javax.persistence.schema-generation.create-source" value="metadata-then-script"/>-->
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/data.sql"/>  <!--skryp startowy-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.characterEncoding" value="utf8"/>

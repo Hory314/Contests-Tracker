@@ -3,6 +3,8 @@ package pl.mhordyjewicz.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -10,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import pl.mhordyjewicz.converter.RewardTypeConverter;
+import pl.mhordyjewicz.converter.TagConverter;
 
 @Configuration
 @ComponentScan(basePackages = "pl.mhordyjewicz")
@@ -37,5 +41,24 @@ public class WebConfig extends WebMvcConfigurerAdapter
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
+    }
+
+    @Bean
+    public Converter tagConverter()
+    {
+        return new TagConverter();
+    }
+
+    @Bean
+    public Converter rewardTypeConverter()
+    {
+        return new RewardTypeConverter();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry)
+    {
+        registry.addConverter(tagConverter());
+        registry.addConverter(rewardTypeConverter());
     }
 }

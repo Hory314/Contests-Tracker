@@ -14,19 +14,19 @@ public class CommonControllerAdvice
     @Autowired
     CategoryService categoryService;
 
-    @ModelAttribute
+    @ModelAttribute("categories")
     List<Category> categories()
     {
         return categoryService.getAllCategories();
     }
 
-    @ModelAttribute
+    @ModelAttribute("tags")
     List<Category> tags()
     {
         return categoryService.getAllTags();
     }
 
-    @ModelAttribute
+    @ModelAttribute("rewardTypes")
     List<Category> rewardTypes()
     {
         return categoryService.getAllRewardTypes();

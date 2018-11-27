@@ -15,12 +15,8 @@ public class ContestDTO
     @Size(min = 3, max = 255)
     private String title;
 
-    @NotNull
-    @NotEmpty
     private LocalDateTime startDate;
 
-    @NotNull
-    @NotEmpty
     private LocalDateTime endDate;
 
     private String shortDescription;
@@ -46,7 +42,6 @@ public class ContestDTO
 
     private List<Category> tags;
 
-    @Size(min = 1)
     private List<Category> rewardTypes;
 
     public String getTitle()
