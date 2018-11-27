@@ -5,7 +5,9 @@ import pl.mhordyjewicz.entity.Category;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class ContestDTO
@@ -15,9 +17,17 @@ public class ContestDTO
     @Size(min = 3, max = 255)
     private String title;
 
-    private LocalDateTime startDate;
+    @NotNull
+    private LocalDate startDate;
 
-    private LocalDateTime endDate;
+    @NotNull
+    private LocalTime startTime;
+
+    @NotNull
+    private LocalDate endDate;
+
+    @NotNull
+    private LocalTime endTime;
 
     private String shortDescription;
 
@@ -54,24 +64,44 @@ public class ContestDTO
         this.title = title;
     }
 
-    public LocalDateTime getStartDate()
+    public LocalDate getStartDate()
     {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate)
+    public void setStartDate(LocalDate startDate)
     {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate()
+    public LocalTime getStartTime()
+    {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime)
+    {
+        this.startTime = startTime;
+    }
+
+    public LocalDate getEndDate()
     {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate)
+    public void setEndDate(LocalDate endDate)
     {
         this.endDate = endDate;
+    }
+
+    public LocalTime getEndTime()
+    {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime)
+    {
+        this.endTime = endTime;
     }
 
     public String getShortDescription()

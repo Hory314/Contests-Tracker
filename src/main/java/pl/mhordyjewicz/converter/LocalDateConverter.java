@@ -5,23 +5,25 @@ import org.springframework.core.convert.converter.Converter;
 import pl.mhordyjewicz.entity.Category;
 import pl.mhordyjewicz.repository.CategoryRepository;
 
-public class RewardTypeConverter implements Converter<String , Category>
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+public class LocalDateConverter implements Converter<String, LocalDate>
 {
+
     @Autowired
     CategoryRepository categoryRepository;
 
     @Override
-    public Category convert(String reward_type)
+    public LocalDate convert(String sDate)
     {
         try
         {
-            Long id = Long.parseLong(reward_type);
-            Category category = categoryRepository.findOne(id);
-            category.setType("reward_type");
-            return category;
+            return LocalDate.parse(sDate);
         }
-        catch (Exception e)
+        catch (DateTimeParseException e)
         {
+            e.printStackTrace();
             return null;
         }
     }

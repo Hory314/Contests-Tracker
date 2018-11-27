@@ -11,11 +11,11 @@ public class TagConverter implements Converter<String , Category>
     CategoryRepository categoryRepository;
 
     @Override
-    public Category convert(String s)
+    public Category convert(String tag)
     {
         try
         {
-            Long id = Long.parseLong(s);
+            Long id = Long.parseLong(tag);
             Category category = categoryRepository.findOne(id);
             category.setType("tag");
             return category;

@@ -31,7 +31,7 @@ public class Contest
     @Column(name = "end_date", nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime endDate;
 
-    @Column(name = "contest_link", unique = true)
+    @Column(name = "contest_link")
     private String contestLink;
 
     @Column(name = "rules_link")

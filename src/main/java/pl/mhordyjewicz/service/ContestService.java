@@ -1,6 +1,7 @@
 package pl.mhordyjewicz.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.mhordyjewicz.dto.ContestDTO;
@@ -10,6 +11,8 @@ import pl.mhordyjewicz.repository.CategoryRepository;
 import pl.mhordyjewicz.repository.ContestRepository;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +35,13 @@ public class ContestService
         contest.setContestLink(contestDTO.getContestLink());
         contest.setOrganizer(contestDTO.getOrganizer());
         contest.setRewardDescription(contestDTO.getRewardDescription());
-//        contest.setImage(contestDTO.getImage());
+        // contest.setImage(contestDTO.getImage());
         contest.setRulesLink(contestDTO.getRulesLink());
-        contest.setStartDate(contestDTO.getStartDate());
-        contest.setEndDate(contestDTO.getEndDate());
+        LocalDateTime ldt = LocalDateTime.of(contestDTO.getStartDate(), contestDTO.getStartTime());
+
+
+        contest.setStartDate(LocalDateTime.of(contestDTO.getStartDate(), contestDTO.getStartTime()));
+        contest.setEndDate(LocalDateTime.of(contestDTO.getEndDate(), contestDTO.getEndTime()));
 
         List<Category> categories = new ArrayList<>();
 
@@ -43,8 +49,14 @@ public class ContestService
 
         // join all - categories, tags and reward types
         categories.add(category);
-        contestDTO.getTags().forEach(categories::add); //fixme get from db
-        contestDTO.getRewardTypes().forEach(categories::add); //fixme get from db
+        contestDTO.getTags().forEach(c ->
+        {
+            categories.add(categoryRepository.findOne(c.getId()));
+        });
+        contestDTO.getRewardTypes().forEach(c ->
+        {
+            categories.add(categoryRepository.findOne(c.getId()));
+        });
 
         contest.setCategories(categories);
 

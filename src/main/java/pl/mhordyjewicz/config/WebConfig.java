@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import pl.mhordyjewicz.converter.LocalDateConverter;
 import pl.mhordyjewicz.converter.RewardTypeConverter;
 import pl.mhordyjewicz.converter.TagConverter;
 
@@ -55,10 +56,17 @@ public class WebConfig extends WebMvcConfigurerAdapter
         return new RewardTypeConverter();
     }
 
+    @Bean
+    public Converter localDateConverter()
+    {
+        return new LocalDateConverter();
+    }
+
     @Override
     public void addFormatters(FormatterRegistry registry)
     {
         registry.addConverter(tagConverter());
         registry.addConverter(rewardTypeConverter());
+        registry.addConverter(localDateConverter());
     }
 }
