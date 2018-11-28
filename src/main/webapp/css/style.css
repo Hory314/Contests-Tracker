@@ -1,4 +1,19 @@
-.form-error
-{
+.form-error {
     color: red;
 }
+
+.contest {
+    border: 1px solid black;
+    width: 350px;
+    display: inline-block;
+}
+
+.contest-details {
+    border: 1px solid black;
+}
+
+.contest img, .contest-details img {
+    width: inherit;
+    height: auto;
+}
+

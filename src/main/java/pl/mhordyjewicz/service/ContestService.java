@@ -1,7 +1,6 @@
 package pl.mhordyjewicz.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.mhordyjewicz.dto.ContestDTO;
@@ -12,9 +11,7 @@ import pl.mhordyjewicz.repository.ContestRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,10 +63,8 @@ public class ContestService
         {
             // save image and get its path on the server
             String imagePathOnServer = fileUploadService.saveImage(contestDTO.getImage(), request);
-            System.out.println(imagePathOnServer);
             // add path to entity
             contest.setImage(imagePathOnServer);
-            System.out.println("Ścieżka do pliku (cs): " + imagePathOnServer);
             // save to db
             contestRepository.save(contest);
         }
@@ -77,5 +72,15 @@ public class ContestService
         {
             e.printStackTrace();
         }
+    }
+
+    public List<Contest> getAllContests()
+    {
+        return contestRepository.findAll();
+    }
+
+    public Contest getContest(Long id)
+    {
+        return contestRepository.findOne(id);
     }
 }

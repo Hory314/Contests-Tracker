@@ -36,7 +36,7 @@ public class AddContestController
             return "contest/add";
         }
 
-        contestService.save(contestDTO,request);
+        contestService.save(contestDTO, request);
         return "redirect:/";
     }
 

@@ -2,3 +2,8 @@ INSERT INTO contestsdb.categories (id, name, type) VALUES (1, 'alkohol', 'tag');
 INSERT INTO contestsdb.categories (id, name, type) VALUES (2, 'prezenty', 'tag');
 INSERT INTO contestsdb.categories (id, name, type) VALUES (3, 'Internetowe', 'category');
 INSERT INTO contestsdb.categories (id, name, type) VALUES (4, 'wycieczka', 'reward_type');
+
+INSERT INTO contestsdb.contests (id, contest_link, description, end_date, image, organizer, reward_description, rules_link, short_description, start_date, title) VALUES (1, 'saf', 'asf', '2018-11-22 03:26:00', '/upload-dir/QpQcXoKk-Zrzut ekranu z 2018-11-22 11-33-11.png', 'asf', 'asg', 'asf', 'Super k', '2018-11-08 22:26:00', 'Nowy');
+INSERT INTO contestsdb.contests (id, contest_link, description, end_date, image, organizer, reward_description, rules_link, short_description, start_date, title) VALUES (2, 'saf', 'asf', '2018-11-22 03:26:00', '/upload-dir/9ZMpn7uw-Zrzut ekranu z 2018-11-12 09-15-42.png', 'asf', 'asg', 'asf', 'Super k', '2018-11-08 22:26:00', 'Nowy2');
+INSERT INTO contestsdb.contests (id, contest_link, description, end_date, image, organizer, reward_description, rules_link, short_description, start_date, title) VALUES (3, 'asdf', 'saf', '2018-11-08 22:05:00', '/upload-dir/MjZeev73-Zrzut ekranu z 2018-10-15 09-13-59.png', 'asf', 'safd', 'asfsafasf', 'sfas', '2018-10-31 22:05:00', 'Fdfdsf');
+INSERT INTO contestsdb.contests (id, contest_link, description, end_date, image, organizer, reward_description, rules_link, short_description, start_date, title) VALUES (4, 'warg', 'rwa', '2018-11-14 22:09:00', '/upload-dir/x42FiXd8-Zrzut ekranu z 2018-11-22 11-32-52.png', 'awrh', 'awf', 'wafe', 'saf', '2018-10-31 22:26:00', 'sagg');

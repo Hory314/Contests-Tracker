@@ -2,6 +2,7 @@ package pl.mhordyjewicz.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -165,6 +166,21 @@ public class Contest
         this.categories = categories;
     }
 
+    public String getFormattedStartDate()
+    {
+        return formatDate(this.startDate);
+    }
+
+    public String getFormattedEndDate()
+    {
+        return formatDate(this.endDate);
+    }
+
+    private String formatDate(LocalDateTime date)
+    {
+        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    }
+
     @Override
     public String toString()
     {
@@ -196,5 +212,10 @@ public class Contest
     public int hashCode()
     {
         return Objects.hash(id);
+    }
+
+    public String getSimpleTitle()
+    {
+        return this.title.replaceAll("\\s", "-").toLowerCase();
     }
 }
