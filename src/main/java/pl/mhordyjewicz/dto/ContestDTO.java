@@ -1,17 +1,20 @@
 package pl.mhordyjewicz.dto;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 import pl.mhordyjewicz.entity.Category;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 public class ContestDTO
 {
+    private Long id;
+
     @NotNull
     @NotEmpty
     @Size(min = 3, max = 255)
@@ -46,6 +49,8 @@ public class ContestDTO
     @NotNull
     @NotEmpty
     private String rewardDescription;
+
+    private MultipartFile image;
 
     @NotNull
     private Category category;
@@ -99,6 +104,16 @@ public class ContestDTO
         return endTime;
     }
 
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+
     public void setEndTime(LocalTime endTime)
     {
         this.endTime = endTime;
@@ -122,6 +137,16 @@ public class ContestDTO
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public MultipartFile getImage()
+    {
+        return image;
+    }
+
+    public void setImage(MultipartFile image)
+    {
+        this.image = image;
     }
 
     public String getOrganizer()
@@ -211,5 +236,24 @@ public class ContestDTO
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContestDTO that = (ContestDTO) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(startDate, that.startDate) &&
+                Objects.equals(startTime, that.startTime) &&
+                Objects.equals(endDate, that.endDate) &&
+                Objects.equals(endTime, that.endTime) &&
+                Objects.equals(description, that.description);
+    }
 
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(id, title, startDate, startTime, endDate, endTime, description);
+    }
 }

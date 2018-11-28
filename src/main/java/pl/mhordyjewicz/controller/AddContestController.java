@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.mhordyjewicz.dto.ContestDTO;
 import pl.mhordyjewicz.service.ContestService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -28,14 +29,14 @@ public class AddContestController
     }
 
     @PostMapping
-    public String addContest(@ModelAttribute("newContest") @Valid ContestDTO contestDTO, BindingResult bindingResult)
+    public String addContest(HttpServletRequest request, @ModelAttribute("newContest") @Valid ContestDTO contestDTO, BindingResult bindingResult)
     {
         if (bindingResult.hasErrors())
         {
             return "contest/add";
         }
 
-        contestService.save(contestDTO);
+        contestService.save(contestDTO,request);
         return "redirect:/";
     }
 

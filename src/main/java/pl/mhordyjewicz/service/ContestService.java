@@ -10,7 +10,9 @@ import pl.mhordyjewicz.entity.Contest;
 import pl.mhordyjewicz.repository.CategoryRepository;
 import pl.mhordyjewicz.repository.ContestRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -26,7 +28,11 @@ public class ContestService
     @Autowired
     ContestRepository contestRepository;
 
-    public void save(@Valid ContestDTO contestDTO)
+    @Autowired
+    FileUploadService fileUploadService;
+
+
+    public void save(@Valid ContestDTO contestDTO, HttpServletRequest request)
     {
         Contest contest = new Contest();
         contest.setTitle(contestDTO.getTitle());
@@ -35,11 +41,7 @@ public class ContestService
         contest.setContestLink(contestDTO.getContestLink());
         contest.setOrganizer(contestDTO.getOrganizer());
         contest.setRewardDescription(contestDTO.getRewardDescription());
-        // contest.setImage(contestDTO.getImage());
         contest.setRulesLink(contestDTO.getRulesLink());
-        LocalDateTime ldt = LocalDateTime.of(contestDTO.getStartDate(), contestDTO.getStartTime());
-
-
         contest.setStartDate(LocalDateTime.of(contestDTO.getStartDate(), contestDTO.getStartTime()));
         contest.setEndDate(LocalDateTime.of(contestDTO.getEndDate(), contestDTO.getEndTime()));
 
@@ -57,9 +59,23 @@ public class ContestService
         {
             categories.add(categoryRepository.findOne(c.getId()));
         });
-
         contest.setCategories(categories);
 
-        contestRepository.save(contest);
+        System.out.println("zapis obrazka...");
+        try
+        {
+            // save image and get its path on the server
+            String imagePathOnServer = fileUploadService.saveImage(contestDTO.getImage(), request);
+            System.out.println(imagePathOnServer);
+            // add path to entity
+            contest.setImage(imagePathOnServer);
+            System.out.println("Ścieżka do pliku (cs): " + imagePathOnServer);
+            // save to db
+            contestRepository.save(contest);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

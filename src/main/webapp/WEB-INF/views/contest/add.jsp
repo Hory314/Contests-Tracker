@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../template/doc_header.jsp"/>
-<form:form modelAttribute="newContest" method="post">
+<form:form modelAttribute="newContest" method="post" enctype="multipart/form-data">
     <p>
         <form:input path="title" placeholder="Tytuł"/>
         <form:errors path="title" cssClass="form-error"/>
@@ -55,6 +55,11 @@
         Rodzaj nagrody:<br>
         <form:checkboxes path="rewardTypes" items="${rewardTypes}" itemLabel="name" itemValue="id"/>
         <form:errors path="rewardTypes" cssClass="form-error"/>
+    </p>
+    <p>
+        Obraz:<br>
+        <form:input type="file" accept="image/png, image/jpeg" path="image"/>
+        <form:errors path="image" cssClass="form-error"/>
     </p>
     <p>
         <input type="submit" value="Dodaj">
