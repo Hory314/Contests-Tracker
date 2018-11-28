@@ -20,7 +20,7 @@ public class Contest
     @Column(nullable = false)
     private String organizer;
 
-    @Column(name = "short_description")
+    @Column(name = "short_description", columnDefinition = "TEXT")
     private String shortDescription;
 
     @Column(columnDefinition = "TEXT", nullable = false)
@@ -40,7 +40,7 @@ public class Contest
 
     private String image;
 
-    @Column(name = "reward_description")
+    @Column(name = "reward_description", columnDefinition = "TEXT")
     private String rewardDescription;
 
     @ManyToMany
