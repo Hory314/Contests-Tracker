@@ -15,7 +15,7 @@ public class MainController
     @GetMapping("/")
     public String home(Model model)
     {
-        model.addAttribute("contests", contestService.getAllContests());
+        model.addAttribute("contests", contestService.getAllAcceptedContests());
         return "contest/main";
     }
 }

@@ -28,11 +28,11 @@
 
                 <header>
 
-                    <h2><span>avana</span> A Brand new Agency.</h2>
+                    <h2><span>Konkursy</span> dla Ciebie!</h2>
 
                 </header>
 
-                <p>This is the story of Avana, a minimal Bootstrap template for creative agency.</p>
+                <p>Śleź konkursy razem z nami i daj sobie szansę na wygraną!</p>
 
             </article>
 
@@ -41,17 +41,18 @@
 
         <section class="col-xs-12 col-sm-6 col-md-6 col-lg-6 grid">
 
-            <figure class="effect-oscar">
+            <figure class="effect-oscar" style="background-color: <%=Utils.randomColor()%>">
 
-                <img src="/images/home-images/image-1.jpg" alt="" class="img-responsive"/>
+                <img src="/images/gift-main-big.jpeg" alt="" class="img-responsive"/>
+                <%--<img src="/images/home-images/image-1.jpg" alt="" class="img-responsive"/>--%>
 
                 <figcaption>
 
-                    <h2>Eliana Dedda<span> Identity</span></h2>
+                    <h2>Dodaj nowy <span>konkurs</span></h2>
 
-                    <p>Personal Brand Identity.</p>
+                    <p>Daj znać innym o konkursie!</p>
 
-                    <a href="/works-details.html">View more</a>
+                    <a href="/add">Dodaj nowy konkurs</a>
 
                 </figcaption>
 
@@ -73,7 +74,7 @@
                             <%--<h2 class="c-title">${contest.title}</h2>--%>
                         <figure class="effect-oscar" style="background-color: <%=Utils.randomColor()%>">
 
-                            <img src="${contest.image}" alt="" class="img-responsive"/>
+                            <img src="${contest.image}" alt="${contest.title}" class="img-responsive"/>
 
                             <figcaption>
 
@@ -110,7 +111,7 @@
                             <%--<h2 class="c-title">${contest.title}</h2>--%>
                         <figure class="effect-oscar" style="background-color: <%=Utils.randomColor()%>">
 
-                            <img src="${contest.image}" alt="" class="img-responsive"/>
+                            <img src="${contest.image}" alt="${contest.title}" class="img-responsive"/>
 
                             <figcaption>
 

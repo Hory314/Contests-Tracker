@@ -46,6 +46,9 @@ public class Contest
     @ManyToMany
     private List<Category> categories;
 
+    @Column(nullable = false, columnDefinition = "BIT DEFAULT TRUE") // todo change to false later
+    private Boolean accepted;
+
     public Long getId()
     {
         return id;

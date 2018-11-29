@@ -83,4 +83,10 @@ public class ContestService
     {
         return contestRepository.findOne(id);
     }
+
+    public List<Contest> getAllAcceptedContests()
+    {
+        return contestRepository.findByAccepted();
+    }
+
 }
