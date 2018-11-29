@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../template/doc_header.jsp"/>
+<%--<jsp:include page="../template/doc_header.jsp"/>--%>
 <form:form modelAttribute="newContest" method="post" enctype="multipart/form-data">
     <p>
         <form:input path="title" placeholder="Tytuł"/>
@@ -57,12 +58,18 @@
         <form:errors path="rewardTypes" cssClass="form-error"/>
     </p>
     <p>
-        Obraz:<br>
+        Obraz:<c:if test="${newContest.imageURI != null}"><img width="250" src="${newContest.imageURI}"></c:if><br>
         <form:input type="file" accept="image/png, image/jpeg" path="image"/>
         <form:errors path="image" cssClass="form-error"/>
     </p>
     <p>
+        Email:<br>
+        <form:input type="email" path="email"/>
+        <form:errors path="email" cssClass="form-error"/>
+    </p>
+    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+    <p>
         <input type="submit" value="Dodaj">
     </p>
 </form:form>
-<jsp:include page="../template/doc_footer.jsp"/>
+<%--<jsp:include page="../template/doc_footer.jsp"/>--%>

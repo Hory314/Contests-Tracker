@@ -3,6 +3,7 @@ package pl.mhordyjewicz.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
@@ -21,6 +22,7 @@ import java.nio.file.StandardCopyOption;
 import org.apache.commons.lang.RandomStringUtils;
 
 @Service
+@Transactional
 public class FileUploadService
 {
 

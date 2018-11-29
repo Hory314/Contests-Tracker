@@ -18,10 +18,18 @@
                 </td>
             </tr>
             <tr>
+                <td>Email</td>
+                <td>
+                        ${contest.email}<br>
+                    <a href="<s:url value='/adminpanel/request-edit/${contest.id}'/>">Poproś o edycję</a>
+                    <br><a href="/contest/edit?hash=${contest.editHash}">User edit link</a>
+                </td>
+            </tr>
+            <tr>
                 <td>Zaakceptowany</td>
                 <td style="background-color:
                 <c:if test='${contest.accepted}'>#53CE08</c:if>
-                    <c:if test='${not contest.accepted}'>#E21F22</c:if>;">
+                <c:if test='${not contest.accepted}'>#E21F22</c:if>;">
                     <a href="<s:url value='/adminpanel/toggle/${contest.id}'/>">Przełącz</a>
                 </td>
             </tr>
@@ -73,13 +81,13 @@
             <tr>
                 <td>Kategoria</td>
                 <td>
-                        <%--${contest.categories.get(0)}--%>
+                        ${contest.category.name}
                 </td>
             </tr>
             <tr>
                 <td>Tagi</td>
                 <td>
-                    <c:forEach items="${contest.categories}" var="tag"> <%-- fixme --%>
+                    <c:forEach items="${contest.tags}" var="tag"> <%-- fixme --%>
                         ${tag.name}
                     </c:forEach>
                 </td>
@@ -87,7 +95,7 @@
             <tr>
                 <td>Rodzaj nagrody</td>
                 <td>
-                    <c:forEach items="${contest.categories}" var="rewardType"> <%-- fixme --%>
+                    <c:forEach items="${contest.rewardTypes}" var="rewardType"> <%-- fixme --%>
                         ${rewardType.name}
                     </c:forEach>
                 </td>

@@ -5,18 +5,28 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "categories")
-public class Category
+@Table(name = "tags")
+public class Tag
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     private List<Contest> contests;
+
+    public List<Contest> getContests()
+    {
+        return contests;
+    }
+
+    public void setContests(List<Contest> contests)
+    {
+        this.contests = contests;
+    }
 
     public Long getId()
     {
@@ -38,36 +48,28 @@ public class Category
         this.name = name;
     }
 
-    public List<Contest> getContests()
-    {
-        return contests;
-    }
-
-    public void setContests(List<Contest> contests)
-    {
-        this.contests = contests;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'';
-    }
-
     @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id);
+        Tag tag = (Tag) o;
+        return Objects.equals(id, tag.id) &&
+                Objects.equals(name, tag.name);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(id);
+        return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "RewardType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

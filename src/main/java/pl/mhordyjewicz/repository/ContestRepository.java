@@ -10,4 +10,6 @@ public interface ContestRepository extends JpaRepository<Contest, Long>
 {
     @Query("SELECT c FROM Contest c WHERE c.accepted = true")
     List<Contest> findByAccepted();
+
+    Contest findOneByEditHash(String hash);
 }

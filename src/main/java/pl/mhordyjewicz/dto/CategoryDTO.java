@@ -15,7 +15,6 @@ public class CategoryDTO
     @Size(min = 3, max = 255, message = "Nazwa musi mieć od 3 do 255 znaków")
     private String name;
 
-    private String type;
 
     public Long getId()
     {
@@ -37,24 +36,12 @@ public class CategoryDTO
         this.name = name;
     }
 
-    public String getType()
-    {
-        return type;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
-    }
-
     @Override
     public String toString()
     {
         return "CategoryDTO{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+                ", name='" + name + '\'' + '}';
     }
 
     @Override

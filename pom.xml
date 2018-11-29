@@ -70,8 +70,8 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.39</version>
-            <!--<version>8.0.11</version>-->
+            <!--<version>5.1.39</version>-->
+            <version>8.0.11</version>
         </dependency>
 
         <!-- Walidacja -->
@@ -103,7 +103,7 @@
             <version>2.6</version>
         </dependency>
 
-<!-- Ssec -->
+        <!-- Ssec -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -114,27 +114,6 @@
             <artifactId>spring-security-config</artifactId>
             <version>4.2.10.RELEASE</version>
         </dependency>
-
-        <!-- Spring Security Core -->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-core</artifactId>-->
-        <!--<version>${spring-security.version}</version>-->
-        <!--</dependency>-->
-
-        <!--&lt;!&ndash; Spring Security Web &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-web</artifactId>-->
-        <!--<version>${spring-security.version}</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-config</artifactId>-->
-        <!--<version>${spring-security.version}</version>-->
-        <!--&lt;!&ndash;<scope>runtime</scope>&ndash;&gt;-->
-        <!--</dependency>-->
     </dependencies>
 
 

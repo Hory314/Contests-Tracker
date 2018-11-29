@@ -1,8 +1,11 @@
 package pl.mhordyjewicz.dto;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 import pl.mhordyjewicz.entity.Category;
+import pl.mhordyjewicz.entity.RewardType;
+import pl.mhordyjewicz.entity.Tag;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -55,9 +58,67 @@ public class ContestDTO
     @NotNull
     private Category category;
 
-    private List<Category> tags;
+    private List<Tag> tags;
 
-    private List<Category> rewardTypes;
+    private List<RewardType> rewardTypes;
+
+    @Email
+    @NotNull
+    @NotEmpty
+    private String email;
+
+    private String imageURI;
+// ------------ //
+
+
+    @Override
+    public String toString()
+    {
+        return "ContestDTO{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", startDate=" + startDate +
+                ", startTime=" + startTime +
+                ", endDate=" + endDate +
+                ", endTime=" + endTime +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", description='" + description + '\'' +
+                ", organizer='" + organizer + '\'' +
+                ", contestLink='" + contestLink + '\'' +
+                ", rulesLink='" + rulesLink + '\'' +
+                ", rewardDescription='" + rewardDescription + '\'' +
+                ", image=" + image +
+                ", category=" + category +
+                ", email='" + email + '\'' +
+                ", imageURI='" + imageURI + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContestDTO that = (ContestDTO) o;
+        return Objects.equals(title, that.title) &&
+                Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(title, email);
+    }
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public String getTitle()
     {
@@ -104,16 +165,6 @@ public class ContestDTO
         return endTime;
     }
 
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
     public void setEndTime(LocalTime endTime)
     {
         this.endTime = endTime;
@@ -137,16 +188,6 @@ public class ContestDTO
     public void setDescription(String description)
     {
         this.description = description;
-    }
-
-    public MultipartFile getImage()
-    {
-        return image;
-    }
-
-    public void setImage(MultipartFile image)
-    {
-        this.image = image;
     }
 
     public String getOrganizer()
@@ -189,6 +230,16 @@ public class ContestDTO
         this.rewardDescription = rewardDescription;
     }
 
+    public MultipartFile getImage()
+    {
+        return image;
+    }
+
+    public void setImage(MultipartFile image)
+    {
+        this.image = image;
+    }
+
     public Category getCategory()
     {
         return category;
@@ -199,61 +250,43 @@ public class ContestDTO
         this.category = category;
     }
 
-    public List<Category> getTags()
+    public List<Tag> getTags()
     {
         return tags;
     }
 
-    public void setTags(List<Category> tags)
+    public void setTags(List<Tag> tags)
     {
         this.tags = tags;
     }
 
-    public List<Category> getRewardTypes()
+    public List<RewardType> getRewardTypes()
     {
         return rewardTypes;
     }
 
-    public void setRewardTypes(List<Category> rewardTypes)
+    public void setRewardTypes(List<RewardType> rewardTypes)
     {
         this.rewardTypes = rewardTypes;
     }
 
-    @Override
-    public String toString()
+    public String getEmail()
     {
-        return "ContestDTO{" +
-                "title='" + title + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", shortDescription='" + shortDescription + '\'' +
-                ", description='" + description + '\'' +
-                ", organizer='" + organizer + '\'' +
-                ", contestLink='" + contestLink + '\'' +
-                ", rulesLink='" + rulesLink + '\'' +
-                ", rewardDescription='" + rewardDescription + '\'' +
-                ", category=" + category +
-                '}';
+        return email;
     }
 
-    @Override
-    public boolean equals(Object o)
+    public void setEmail(String email)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContestDTO that = (ContestDTO) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(title, that.title) &&
-                Objects.equals(startDate, that.startDate) &&
-                Objects.equals(startTime, that.startTime) &&
-                Objects.equals(endDate, that.endDate) &&
-                Objects.equals(endTime, that.endTime) &&
-                Objects.equals(description, that.description);
+        this.email = email;
     }
 
-    @Override
-    public int hashCode()
+    public String getImageURI()
     {
-        return Objects.hash(id, title, startDate, startTime, endDate, endTime, description);
+        return imageURI;
+    }
+
+    public void setImageURI(String imageURI)
+    {
+        this.imageURI = imageURI;
     }
 }

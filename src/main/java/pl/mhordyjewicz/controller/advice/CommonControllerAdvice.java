@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.mhordyjewicz.entity.Category;
+import pl.mhordyjewicz.entity.RewardType;
+import pl.mhordyjewicz.entity.Tag;
 import pl.mhordyjewicz.service.CategoryService;
+import pl.mhordyjewicz.service.RewardTypeService;
+import pl.mhordyjewicz.service.TagService;
 
 import java.util.List;
 
@@ -14,6 +18,12 @@ public class CommonControllerAdvice
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    TagService tagService;
+
+    @Autowired
+    RewardTypeService rewardTypeService;
+
     @ModelAttribute("categories")
     List<Category> categories()
     {
@@ -21,14 +31,14 @@ public class CommonControllerAdvice
     }
 
     @ModelAttribute("tags")
-    List<Category> tags()
+    List<Tag> tags()
     {
-        return categoryService.getAllTags();
+        return tagService.getAllTags();
     }
 
     @ModelAttribute("rewardTypes")
-    List<Category> rewardTypes()
+    List<RewardType> rewardTypes()
     {
-        return categoryService.getAllRewardTypes();
+        return rewardTypeService.getAllRewardTypes();
     }
 }

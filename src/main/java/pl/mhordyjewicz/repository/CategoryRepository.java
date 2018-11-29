@@ -9,7 +9,5 @@ import java.util.List;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long>
 {
-    List<Category> findAllByType(String type);
 
-    Category findOneByIdAndType(Long id, String type);
 }

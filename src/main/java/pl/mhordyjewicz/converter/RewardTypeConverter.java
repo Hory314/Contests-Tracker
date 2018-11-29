@@ -3,22 +3,22 @@ package pl.mhordyjewicz.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import pl.mhordyjewicz.entity.Category;
+import pl.mhordyjewicz.entity.RewardType;
 import pl.mhordyjewicz.repository.CategoryRepository;
+import pl.mhordyjewicz.repository.RewardTypeRepository;
 
-public class RewardTypeConverter implements Converter<String , Category>
+public class RewardTypeConverter implements Converter<String , RewardType>
 {
     @Autowired
-    CategoryRepository categoryRepository;
+    RewardTypeRepository rewardTypeRepository;
 
     @Override
-    public Category convert(String reward_type)
+    public RewardType convert(String reward_type)
     {
         try
         {
             Long id = Long.parseLong(reward_type);
-            Category category = categoryRepository.findOne(id);
-            category.setType("reward_type");
-            return category;
+            return rewardTypeRepository.findOne(id);
         }
         catch (Exception e)
         {

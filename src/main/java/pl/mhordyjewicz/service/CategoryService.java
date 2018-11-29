@@ -19,34 +19,8 @@ public class CategoryService
 
     public List<Category> getAllCategories()
     {
-        return categoryRepository.findAllByType("category");
+        return categoryRepository.findAll();
     }
-
-    public List<Category> getAllRewardTypes()
-    {
-        return categoryRepository.findAllByType("reward_type");
-    }
-
-    public List<Category> getAllTags()
-    {
-        return categoryRepository.findAllByType("tag");
-    }
-
-    public Category getCategory(Long id)
-    {
-        return categoryRepository.findOneByIdAndType(id, "category");
-    }
-
-    public Category getTag(Long id)
-    {
-        return categoryRepository.findOneByIdAndType(id, "tag");
-    }
-
-    public Category getRewardType(Long id)
-    {
-        return categoryRepository.findOneByIdAndType(id, "reward_type");
-    }
-
 
     public void deleteCategory(Long id)
     {
@@ -57,7 +31,6 @@ public class CategoryService
     {
         Category category = new Category();
         category.setName(categoryDTO.getName());
-        category.setType(categoryDTO.getType());
 
         categoryRepository.save(category);
     }

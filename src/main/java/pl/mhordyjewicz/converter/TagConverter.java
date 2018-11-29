@@ -3,22 +3,22 @@ package pl.mhordyjewicz.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import pl.mhordyjewicz.entity.Category;
+import pl.mhordyjewicz.entity.Tag;
 import pl.mhordyjewicz.repository.CategoryRepository;
+import pl.mhordyjewicz.repository.TagRepository;
 
-public class TagConverter implements Converter<String , Category>
+public class TagConverter implements Converter<String, Tag>
 {
-   @Autowired
-    CategoryRepository categoryRepository;
+    @Autowired
+    TagRepository tagRepository;
 
     @Override
-    public Category convert(String tag)
+    public Tag convert(String tag)
     {
         try
         {
             Long id = Long.parseLong(tag);
-            Category category = categoryRepository.findOne(id);
-            category.setType("tag");
-            return category;
+            return tagRepository.findOne(id);
         }
         catch (Exception e)
         {

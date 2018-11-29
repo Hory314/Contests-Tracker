@@ -880,7 +880,7 @@ article[role="pge-title-content"].contact-header p a:hover {
 }
 
 .contest-title {
-    display: inline-block;
+    display: block;
     line-height: 1.5;
     font-weight: 900;
     font-size: 36px;

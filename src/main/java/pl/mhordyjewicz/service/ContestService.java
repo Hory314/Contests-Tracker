@@ -6,14 +6,16 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.mhordyjewicz.dto.ContestDTO;
 import pl.mhordyjewicz.entity.Category;
 import pl.mhordyjewicz.entity.Contest;
+import pl.mhordyjewicz.entity.RewardType;
+import pl.mhordyjewicz.entity.Tag;
 import pl.mhordyjewicz.repository.CategoryRepository;
 import pl.mhordyjewicz.repository.ContestRepository;
+import pl.mhordyjewicz.repository.RewardTypeRepository;
+import pl.mhordyjewicz.repository.TagRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,12 @@ public class ContestService
     CategoryRepository categoryRepository;
 
     @Autowired
+    TagRepository tagRepository;
+
+    @Autowired
+    RewardTypeRepository rewardTypeRepository;
+
+    @Autowired
     ContestRepository contestRepository;
 
     @Autowired
@@ -34,6 +42,7 @@ public class ContestService
     public void save(@Valid ContestDTO contestDTO, HttpServletRequest request)
     {
         Contest contest = new Contest();
+        contest.setId(contestDTO.getId());// if comes null with dto = save, otherwise update
         contest.setTitle(contestDTO.getTitle());
         contest.setDescription(contestDTO.getDescription());
         contest.setShortDescription(contestDTO.getShortDescription());
@@ -43,24 +52,29 @@ public class ContestService
         contest.setRulesLink(contestDTO.getRulesLink());
         contest.setStartDate(LocalDateTime.of(contestDTO.getStartDate(), contestDTO.getStartTime()));
         contest.setEndDate(LocalDateTime.of(contestDTO.getEndDate(), contestDTO.getEndTime()));
-
-        List<Category> categories = new ArrayList<>();
+        contest.setAccepted(true); // todo change
+        contest.setUserAccepted(true); // todo change
+        contest.setEmail(contestDTO.getEmail());
 
         Category category = categoryRepository.findOne(contestDTO.getCategory().getId());
+        contest.setCategory(category);
 
-        // join all - categories, tags and reward types
-        categories.add(category);
-        contestDTO.getTags().forEach(c ->
+        // tag list save to entity
+        List<Tag> tags = new ArrayList<>();
+        contestDTO.getTags().forEach(t ->
         {
-            categories.add(categoryRepository.findOne(c.getId()));
+            tags.add(tagRepository.findOne(t.getId()));
         });
-        contestDTO.getRewardTypes().forEach(c ->
-        {
-            categories.add(categoryRepository.findOne(c.getId()));
-        });
-        contest.setCategories(categories);
+        contest.setTags(tags);
 
-        System.out.println("zapis obrazka...");
+        // reward list save to entity
+        List<RewardType> rewardTypes = new ArrayList<>();
+        contestDTO.getRewardTypes().forEach(r ->
+        {
+            rewardTypes.add(rewardTypeRepository.findOne(r.getId()));
+        });
+        contest.setRewardTypes(rewardTypes);
+
         try
         {
             // save image and get its path on the server
@@ -78,9 +92,13 @@ public class ContestService
 
     public List<Contest> getAllContests()
     {
-        List<Contest> contests = contestRepository.findAll();
-        contests.forEach(c -> c.getCategories().size()); // lazy load
-        return contests;
+        List<Contest> all = contestRepository.findAll();
+        all.forEach(c ->
+        {
+            c.getTags().size(); // lazy load
+            c.getRewardTypes().size(); // lazy load
+        });
+        return all;
     }
 
     public Contest getContest(Long id)
@@ -113,10 +131,28 @@ public class ContestService
         contestRepository.delete(id);
     }
 
+    public ContestDTO getContestDTO(String hash)
+    {
+        Long id;
+        try
+        {
+            id = contestRepository.findOneByEditHash(hash).getId();
+        }
+        catch (NullPointerException e)
+        {
+            return null;
+        }
+        return getContestDTO(id);
+    }
+
     public ContestDTO getContestDTO(Long id)
     {
         ContestDTO contestDTO = new ContestDTO();
         Contest contest = contestRepository.getOne(id);
+
+        contest.getTags().size(); // lazy
+        contest.getRewardTypes().size(); // lazy
+
         contestDTO.setId(contest.getId());
         contestDTO.setTitle(contest.getTitle());
         contestDTO.setShortDescription(contest.getShortDescription());
@@ -124,14 +160,16 @@ public class ContestService
         contestDTO.setContestLink(contest.getContestLink());
         contestDTO.setRulesLink(contest.getRulesLink());
         contestDTO.setRewardDescription(contest.getRewardDescription());
-        //contestDTO.setCategory(contest.getCategories());
         contestDTO.setStartDate(contest.getStartDate().toLocalDate());
         contestDTO.setStartTime(contest.getStartDate().toLocalTime());
         contestDTO.setEndDate(contest.getEndDate().toLocalDate());
         contestDTO.setEndTime(contest.getEndDate().toLocalTime());
-
-        // todo continue here
-
+        contestDTO.setEmail(contest.getEmail());
+        contestDTO.setOrganizer(contest.getOrganizer());
+        contestDTO.setCategory(contest.getCategory());
+        contestDTO.setTags(contest.getTags());
+        contestDTO.setRewardTypes(contest.getRewardTypes());
+        contestDTO.setImageURI(contest.getImage());
 
         return contestDTO;
     }

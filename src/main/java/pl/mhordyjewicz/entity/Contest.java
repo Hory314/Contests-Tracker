@@ -43,14 +43,45 @@ public class Contest
     @Column(name = "reward_description", columnDefinition = "TEXT")
     private String rewardDescription;
 
-    @ManyToMany
-    private List<Category> categories;
+    private String email;
 
-    @Column(nullable = false, columnDefinition = "BIT DEFAULT TRUE") // todo change to false later
+    @Column(name = "user_accepted")
+    private Boolean userAccepted;
+
+    @ManyToOne
+    private Category category;
+
+    @ManyToMany
+    private List<Tag> tags;
+
+    @ManyToMany
+    private List<RewardType> rewardTypes;
+
+//    @Column(nullable = false, columnDefinition = "BIT DEFAULT TRUE") // todo change to false later
     private Boolean accepted;
 
-  //  @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT to_base64(random_bytes(32))")
+    //  @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT to_base64(random_bytes(32))")
     private String editHash;
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public Boolean getUserAccepted()
+    {
+        return userAccepted;
+    }
+
+    public void setUserAccepted(Boolean userAccepted)
+    {
+        this.userAccepted = userAccepted;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
 
     public String getEditHash()
     {
@@ -182,14 +213,34 @@ public class Contest
         this.rewardDescription = rewardDescription;
     }
 
-    public List<Category> getCategories()
+    public Category getCategory()
     {
-        return categories;
+        return category;
     }
 
-    public void setCategories(List<Category> categories)
+    public void setCategory(Category category)
     {
-        this.categories = categories;
+        this.category = category;
+    }
+
+    public List<Tag> getTags()
+    {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags)
+    {
+        this.tags = tags;
+    }
+
+    public List<RewardType> getRewardTypes()
+    {
+        return rewardTypes;
+    }
+
+    public void setRewardTypes(List<RewardType> rewardTypes)
+    {
+        this.rewardTypes = rewardTypes;
     }
 
     public String getFormattedStartDate()
