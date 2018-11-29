@@ -14,9 +14,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>4.3.7.RELEASE</spring.version>
+        <spring-security.version>4.2.10.RELEASE</spring-security.version>
     </properties>
 
     <dependencies>
@@ -99,7 +102,41 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
+
+<!-- Ssec -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.2.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.2.10.RELEASE</version>
+        </dependency>
+
+        <!-- Spring Security Core -->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.security</groupId>-->
+        <!--<artifactId>spring-security-core</artifactId>-->
+        <!--<version>${spring-security.version}</version>-->
+        <!--</dependency>-->
+
+        <!--&lt;!&ndash; Spring Security Web &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.security</groupId>-->
+        <!--<artifactId>spring-security-web</artifactId>-->
+        <!--<version>${spring-security.version}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.security</groupId>-->
+        <!--<artifactId>spring-security-config</artifactId>-->
+        <!--<version>${spring-security.version}</version>-->
+        <!--&lt;!&ndash;<scope>runtime</scope>&ndash;&gt;-->
+        <!--</dependency>-->
     </dependencies>
+
 
     <build>
         <finalName>Contests-Tracker</finalName>

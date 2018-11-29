@@ -1,11 +1,10 @@
 package pl.mhordyjewicz.config;
 
-import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import pl.mhordyjewicz.filter.AdminSessionFilter;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
 
 public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletInitializer
 {
@@ -13,7 +12,7 @@ public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletI
     @Override
     protected Class<?>[] getRootConfigClasses()
     {
-        return new Class[]{JPAConfig.class};
+        return new Class[]{JPAConfig.class, WebSecurityConfig.class};
     }
 
     @Override
@@ -21,6 +20,7 @@ public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletI
     {
         return new Class[]{WebConfig.class};
     }
+
 
     @Override
     protected String[] getServletMappings()
@@ -34,8 +34,7 @@ public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletI
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
         encodingFilter.setEncoding("UTF-8");
         encodingFilter.setForceEncoding(true);
-        return new Filter[]{encodingFilter};
+        AdminSessionFilter adminSessionFilter = new AdminSessionFilter();
+        return new Filter[]{encodingFilter/*, adminSessionFilter*/};
     }
-
-
 }
