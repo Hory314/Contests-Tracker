@@ -1,9 +1,7 @@
 package pl.mhordyjewicz.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import pl.mhordyjewicz.service.CategoryService;
-
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +16,9 @@ public class Category
     private String name;
 
     private String type;
+
+    @ManyToMany(mappedBy = "categories")
+    private List<Contest> contests;
 
     public Long getId()
     {
@@ -47,6 +48,16 @@ public class Category
     public void setType(String type)
     {
         this.type = type;
+    }
+
+    public List<Contest> getContests()
+    {
+        return contests;
+    }
+
+    public void setContests(List<Contest> contests)
+    {
+        this.contests = contests;
     }
 
     @Override

@@ -24,12 +24,12 @@ public class CategoryService
 
     public List<Category> getAllRewardTypes()
     {
-        return categoryRepository.findAllByType("tag");
+        return categoryRepository.findAllByType("reward_type");
     }
 
     public List<Category> getAllTags()
     {
-        return categoryRepository.findAllByType("reward_type");
+        return categoryRepository.findAllByType("tag");
     }
 
     public Category getCategory(Long id)

@@ -27,13 +27,14 @@ import java.util.Locale;
 public class JPAConfig
 {
 
-    @Bean
+    @Bean(name = "entityManagerFactory")
     public LocalEntityManagerFactoryBean entityManagerFactory()
     {
         LocalEntityManagerFactoryBean emf = new LocalEntityManagerFactoryBean();
-        emf.setPersistenceUnitName("contestsUnit");
+        emf.setPersistenceUnitName("dbUnit");
         return emf;
     }
+
 
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory emf)

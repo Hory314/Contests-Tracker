@@ -1,16 +1,21 @@
 package pl.mhordyjewicz.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import pl.mhordyjewicz.service.ContestService;
 
 @Controller
 public class MainController
 {
+    @Autowired
+    ContestService contestService;
+
     @GetMapping("/")
-    @ResponseBody
-    public String home()
+    public String home(Model model)
     {
-        return "Hello contests";
+        model.addAttribute("contests", contestService.getAllAcceptedContests());
+        return "contest/main";
     }
 }

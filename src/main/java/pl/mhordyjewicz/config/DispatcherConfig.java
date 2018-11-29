@@ -1,9 +1,11 @@
 package pl.mhordyjewicz.config;
 
+import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.Filter;
+import javax.servlet.*;
 
 public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletInitializer
 {
@@ -34,4 +36,6 @@ public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletI
         encodingFilter.setForceEncoding(true);
         return new Filter[]{encodingFilter};
     }
+
+
 }
