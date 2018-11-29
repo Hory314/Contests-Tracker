@@ -2,7 +2,6 @@ package pl.mhordyjewicz.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import pl.mhordyjewicz.filter.AdminSessionFilter;
 
 import javax.servlet.Filter;
 
@@ -34,7 +33,7 @@ public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletI
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
         encodingFilter.setEncoding("UTF-8");
         encodingFilter.setForceEncoding(true);
-        AdminSessionFilter adminSessionFilter = new AdminSessionFilter();
-        return new Filter[]{encodingFilter/*, adminSessionFilter*/};
+
+        return new Filter[]{encodingFilter};
     }
 }

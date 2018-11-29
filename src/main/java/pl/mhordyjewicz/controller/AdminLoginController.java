@@ -18,31 +18,10 @@ public class AdminLoginController
     AdminLoginService adminLoginService;
 
     @GetMapping("/login")
-    public String prepareLogin(Model model)
+    public String prepareLogin()
     {
-        model.addAttribute("adminDTO", new AdminDTO());
         return "/adminpanel/login";
     }
-
-   /* @PostMapping("/login")
-    public String loginAdmin(Model model, @ModelAttribute("adminDTO") @Valid AdminDTO adminDTO, BindingResult bindingResult)
-    {
-        if(bindingResult.hasErrors())
-        {
-            return "/adminpanel/login";
-        }
-
-//        boolean validCredentials = loginService.checkCredentials(adminDTO.getLogin(), adminDTO.getPassword());
-//        if (!validCredentials) {
-//            bindingResult.rejectValue("bad-login","","Login i/lub hasło niepoprawne");
-//            return "/adminpanel/login";
-//        }
-//
-//        UserDTO admin = loginService.login(form.getLogin(), form.getPassword());
-//        session.setAttribute("admin", admin);
-
-        return "redirect:/adminpanel";
-    }*/
 
     @GetMapping("/logout")
     public String logout(HttpSession session)

@@ -49,6 +49,29 @@ public class Contest
     @Column(nullable = false, columnDefinition = "BIT DEFAULT TRUE") // todo change to false later
     private Boolean accepted;
 
+  //  @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT to_base64(random_bytes(32))")
+    private String editHash;
+
+    public String getEditHash()
+    {
+        return editHash;
+    }
+
+    public void setEditHash(String editHash)
+    {
+        this.editHash = editHash;
+    }
+
+    public Boolean getAccepted()
+    {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted)
+    {
+        this.accepted = accepted;
+    }
+
     public Long getId()
     {
         return id;
