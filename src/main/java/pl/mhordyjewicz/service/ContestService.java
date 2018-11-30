@@ -1,6 +1,9 @@
 package pl.mhordyjewicz.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.mhordyjewicz.dto.ContestDTO;
@@ -14,6 +17,7 @@ import pl.mhordyjewicz.repository.RewardTypeRepository;
 import pl.mhordyjewicz.repository.TagRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -38,9 +42,11 @@ public class ContestService
 
     @Autowired
     FileUploadService fileUploadService;
-
+//
 //    @Autowired
 //    MailSender mailSender;
+
+//
 
 
     public void save(@Valid ContestDTO contestDTO, HttpServletRequest request)
@@ -56,8 +62,8 @@ public class ContestService
         contest.setRulesLink(contestDTO.getRulesLink());
         contest.setStartDate(LocalDateTime.of(contestDTO.getStartDate(), contestDTO.getStartTime()));
         contest.setEndDate(LocalDateTime.of(contestDTO.getEndDate(), contestDTO.getEndTime()));
-        contest.setAccepted(true); // todo change
-        contest.setUserAccepted(true); // todo change
+        contest.setAccepted(false); // todo change
+        contest.setUserAccepted(false); // todo change
         contest.setEmail(contestDTO.getEmail());
 
         Category category = categoryRepository.findOne(contestDTO.getCategory().getId());
@@ -81,19 +87,34 @@ public class ContestService
 
         try
         {
-            // save image and get its path on the server
-            String imagePathOnServer = fileUploadService.saveImage(contestDTO.getImage(), request);
-            // add path to entity
-            contest.setImage(imagePathOnServer);
-            // save to db
-
             Long id = contest.getId();
+            if (contestDTO.getImage().getSize() != 0) // if image send
+            {
+                // save image and get its path on the server
+                String imagePathOnServer = fileUploadService.saveImage(contestDTO.getImage(), request);
+                // add path to entity
+                contest.setImage(imagePathOnServer);
+                // save to db
+            }
+            else // if not - keep previous one
+            {
+                if (id == null) // new post
+                {
+                    contest.setImage(null);
+                }
+                else // updating post
+                {
+                    contest.setImage(contestRepository.getOne(id).getImage());
+                }
+            }
+
 
             contestRepository.save(contest);
 
             if (id == null)
             {
-//                sendMail(contest.getEmail(), contest.getEditHash());
+                Contest c = contestRepository.getOne(contest.getId());
+                System.out.println("Wysłano email z linkiem do aktywacji: " + "http://localhost:8080/activate?hash=" + c.getEditHash());
             }
 
         }
@@ -128,7 +149,11 @@ public class ContestService
 
     public Contest getContest(Long id)
     {
-        return contestRepository.findOne(id);
+
+        Contest c = contestRepository.findOne(id);
+        c.getTags().size(); // lazy
+        c.getRewardTypes().size(); // lazy
+        return c;
     }
 
     public List<Contest> getAllAcceptedContests()
@@ -140,7 +165,7 @@ public class ContestService
     {
         Contest contest = contestRepository.findOne(id);
 
-        if (contest.getAccepted())
+        if (contest.getAccepted() == true)
         {
             contest.setAccepted(false);
         }
@@ -149,6 +174,16 @@ public class ContestService
             contest.setAccepted(true);
         }
         contestRepository.save(contest);
+    }
+
+    public void activate(String hash)
+    {
+        Contest contest = contestRepository.findOneByEditHash(hash);
+        if (contest != null)
+        {
+            contest.setUserAccepted(true);
+            contestRepository.save(contest);
+        }
     }
 
     public void delete(Long id)

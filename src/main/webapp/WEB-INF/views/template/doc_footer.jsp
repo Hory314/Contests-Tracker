@@ -8,7 +8,7 @@
 
     <h1>
 
-        <a href="/index.html" title="avana LLC"><img src="/images/logo.png" title="avana LLC" alt="avana LLC"/></a>
+        <a href="/"><img src="/images/logo.png" width="75"/></a>
 
     </h1>
 
@@ -20,13 +20,9 @@
 
         <ul>
 
-            <li><a href="/index.html" title="Work">Work</a></li>
+            <li><a href="/">Strona główna</a></li>
 
-            <li><a href="/about.html" title="About">About</a></li>
-
-            <li><a href="/blog.html" title="Blog">Blog</a></li>
-
-            <li><a href="/contact.html" title="Contact">Contact</a></li>
+            <li><a href="/adminpanel">Ukryty panel admina</a></li>
 
         </ul>
 
@@ -46,7 +42,7 @@
 
     </ul>
 
-    <p class="copy-right">&copy; 2015 avana LLC.. All rights Resved</p>
+    <p class="copy-right">&copy; 2018 Michał Hordyjewicz</p>
 
 </footer>
 

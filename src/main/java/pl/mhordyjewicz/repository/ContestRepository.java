@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ContestRepository extends JpaRepository<Contest, Long>
 {
-    @Query("SELECT c FROM Contest c WHERE c.accepted = true")
+    @Query("SELECT c FROM Contest c WHERE c.accepted = true AND c.userAccepted = true ORDER BY c.id DESC")
     List<Contest> findByAccepted();
 
     Contest findOneByEditHash(String hash);

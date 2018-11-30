@@ -88,45 +88,4 @@ public class FileUploadService
     }
 
 
-//    public String saveImage(MultipartFile file, HttpServletRequest request) throws IOException
-//    {
-//        System.out.println("Zapis pliku");
-//        prepareDirectory(request);
-//
-//        String imagePathOnServer = null;
-//
-//        String filename = StringUtils.cleanPath(file.getOriginalFilename());
-//        try
-//        {
-//            if (file.isEmpty())
-//            {
-//                throw new IOException("Failed to store empty file " + filename);
-//            }
-//
-////            if (filename.contains("\\.\\."))
-////            {
-////                // This is a security check
-////                throw new IOException(
-////                        "Cannot store file with relative path outside current directory "
-////                                + filename);
-////            }
-//            System.out.println("Zapis pliku2");
-//            try (InputStream inputStream = file.getInputStream())
-//            {
-//                System.out.println("Zapis streamu");
-//                String generatedFileName = RandomStringUtils.randomAlphanumeric(8) + "-" + filename;
-//
-//                Files.copy(inputStream, this.rootLocation.resolve(generatedFileName),
-//                        StandardCopyOption.REPLACE_EXISTING);
-//                System.out.println("Ścieżka do pliku: " + uploadDir + "/" + generatedFileName);
-//                imagePathOnServer = uploadDir + "/" + generatedFileName;
-//            }catch(IOException e){}
-//        }
-//        catch (IOException e)
-//        {
-//            throw new IOException("Failed to store file " + filename, e);
-//        }
-//        return imagePathOnServer;
-//    }
-
 }

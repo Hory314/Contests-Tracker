@@ -13,8 +13,8 @@
     </p>
 </c:if>
 <form method="post">
-    <p><input type="text" id="username" name="username" placeholder="Login"></p>
-    <p><input type="password" id="password" name="password" placeholder="Hasło"></p>
+    <p><input type="text" id="username" name="username" placeholder="Login"> (admin)</p>
+    <p><input type="password" id="password" name="password" placeholder="Hasło"> (myPassword)</p>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <p><input type="submit" value="Zaloguj"></p>
 </form>

@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -81,19 +84,37 @@ public class WebConfig extends WebMvcConfigurerAdapter
         return multipartResolver;
     }
 
-//    @Bean(name="mailSender")
+//    @Bean(name = "javaMailSender")
+//    public JavaMailSender getJavaMailSender() {
+//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//        mailSender.setHost("smtp.wp.pl");
+////        mailSender.setPort(465);
+////
+////        mailSender.setUsername("hory314@wp.pl");
+////        mailSender.setPassword("iamnoob1");
+////
+////        Properties props = mailSender.getJavaMailProperties();
+////        props.put("mail.transport.protocol", "smtp");
+////        props.put("mail.smtp.auth", "true");
+////        props.put("mail.smtp.starttls.enable", "true");
+////        props.put("mail.debug", "true");
+//
+//        return mailSender;
+//    }
+
+//    @Bean(name="javaMailService")
 //    public MailSender javaMailService() {
 //        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-//        javaMailSender.setHost("smtp.gmail.com");
-//        javaMailSender.setPort(587);
-//        javaMailSender.setProtocol("smtp");
-//        javaMailSender.setUsername("email@gmail.com");
-//        javaMailSender.setPassword("password");
-//        Properties mailProperties = new Properties();
-//        mailProperties.put("mail.smtp.auth", "true");
-//        mailProperties.put("mail.smtp.starttls.enable", "starttls");
-//        mailProperties.put("mail.smtp.debug", "true");
-//        javaMailSender.setJavaMailProperties(mailProperties);
+////        javaMailSender.setHost("smtp.wp.pl");
+////        javaMailSender.setPort(465);
+////        javaMailSender.setProtocol("smtp");
+////        javaMailSender.setUsername("hory314@wp.pl");
+////        javaMailSender.setPassword("iamnoob1");
+////        Properties mailProperties = new Properties();
+////        mailProperties.put("mail.smtp.auth", "true");
+////        mailProperties.put("mail.smtp.starttls.enable", "starttls");
+////        mailProperties.put("mail.smtp.debug", "true");
+////        javaMailSender.setJavaMailProperties(mailProperties);
 //        return javaMailSender;
 //    }
 }

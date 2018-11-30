@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../template/doc_header.jsp"/>
 <h1>Panel Admina</h1>
+(<a href="/adminpanel/logout">wyloguj się</a>)
 
 <c:forEach items="${contests}" var="contest">
     <hr>
@@ -23,6 +24,16 @@
                         ${contest.email}<br>
                     <a href="<s:url value='/adminpanel/request-edit/${contest.id}'/>">Poproś o edycję</a>
                     <br><a href="/contest/edit?hash=${contest.editHash}">User edit link</a>
+                    <br><a href="/activate?hash=${contest.editHash}">User accept link</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Użytkownik potwierdził</td>
+                <td style="background-color:
+                <c:if test='${contest.userAccepted}'>#53CE08</c:if>
+                <c:if test='${not contest.userAccepted}'>#E21F22</c:if>;">
+                    <c:if test='${contest.userAccepted}'>TAK</c:if>
+                    <c:if test='${not contest.userAccepted}'>NIE</c:if>
                 </td>
             </tr>
             <tr>
