@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 @Service
 @Transactional
@@ -37,6 +38,9 @@ public class ContestService
 
     @Autowired
     FileUploadService fileUploadService;
+
+//    @Autowired
+//    MailSender mailSender;
 
 
     public void save(@Valid ContestDTO contestDTO, HttpServletRequest request)
@@ -82,13 +86,34 @@ public class ContestService
             // add path to entity
             contest.setImage(imagePathOnServer);
             // save to db
+
+            Long id = contest.getId();
+
             contestRepository.save(contest);
+
+            if (id == null)
+            {
+//                sendMail(contest.getEmail(), contest.getEditHash());
+            }
+
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
     }
+
+//    private void sendMail(String email, String editHash)
+//    {
+//        SimpleMailMessage smm = new SimpleMailMessage();
+//
+//        smm.setFrom("email@gmail.com");
+//        smm.setTo("email@gmail.com");
+//        smm.setSubject("title");
+//        smm.setText("text");
+//
+//        mailSender.send(smm);
+//    }
 
     public List<Contest> getAllContests()
     {

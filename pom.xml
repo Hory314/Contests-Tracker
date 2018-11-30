@@ -114,6 +114,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>4.2.10.RELEASE</version>
         </dependency>
+
+        <!-- mail -->
+
+
+
     </dependencies>
 
 
