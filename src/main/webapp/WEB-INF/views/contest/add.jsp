@@ -65,7 +65,7 @@
             <form:errors path="rewardTypes" cssClass="form-error"/>
         </p>
         <p>
-            Obraz:<c:if test="${newContest.imageURI != null}"><img width="250" src="${newContest.imageURI}"></c:if><br>
+            Obraz:<c:if test="${newContest.imageURI != null}"><img width="250" src="<c:url value="${newContest.imageURI}"/>"></c:if><br>
             <form:input type="file" accept="image/png, image/jpeg" path="image"/>
             <form:errors path="image" cssClass="form-error"/>
         </p>

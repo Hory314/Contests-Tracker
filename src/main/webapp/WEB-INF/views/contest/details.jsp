@@ -20,8 +20,8 @@
                     <h2>${contest.title}</h2>
 
                 </header>
-                <a href="${contest.image}">
-                    <img src="${contest.image}" width="500" style="display: inline-block;">
+                <a href="<c:url value="${contest.image}"/>">
+                    <img src="<c:url value="${contest.image}"/>" width="500" style="display: inline-block;">
                 </a>
             </article>
 
@@ -41,8 +41,8 @@
                 <p>${contest.rewardDescription}</p>
 
                 <span>Organizator: ${contest.organizer}</span><br>
-                <span><a href="${contest.contestLink}">Strona konkursu</a></span><br>
-                <span><a href="${contest.rulesLink}">Regulamin konkursu</a></span><br>
+                <span><a href="<c:url value="${contest.contestLink}"/>">Strona konkursu</a></span><br>
+                <span><a href="<c:url value="${contest.rulesLink}"/>">Regulamin konkursu</a></span><br>
 
                 <hr>
                 <span>Kategoria: ${contest.category.name}</span>

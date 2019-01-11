@@ -1,8 +1,76 @@
+-- categories table
+CREATE TABLE contestsdb.categories
+(
+    id bigint(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL
+);
+CREATE UNIQUE INDEX UK_t8o6pivur7nn124jehx7cygw5 ON contestsdb.categories (name);
+
+-- tags table
+CREATE TABLE contestsdb.tags
+(
+    id bigint(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL
+);
+
+-- reward_type table
+CREATE TABLE contestsdb.reward_type
+(
+    id bigint(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL
+);
+
+-- contests table
+CREATE TABLE contestsdb.contests
+(
+    id bigint(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    accepted bit(1),
+    contest_link varchar(255),
+    description text NOT NULL,
+    editHash varchar(255),
+    email varchar(255),
+    end_date datetime NOT NULL,
+    image varchar(255),
+    organizer varchar(255) NOT NULL,
+    reward_description text,
+    rules_link varchar(255),
+    short_description text,
+    start_date datetime NOT NULL,
+    title varchar(255) NOT NULL,
+    user_accepted bit(1),
+    category_id bigint(20),
+    CONSTRAINT FKt6oti53hlo70sv1fm1lchrnjf FOREIGN KEY (category_id) REFERENCES contestsdb.categories (id)
+);
+CREATE INDEX FKt6oti53hlo70sv1fm1lchrnjf ON contestsdb.contests (category_id);
+
+-- contests_reward_type table
+CREATE TABLE contestsdb.contests_reward_type
+(
+    contests_id bigint(20) NOT NULL,
+    rewardTypes_id bigint(20) NOT NULL,
+    CONSTRAINT FKfk4vhldwpv5nggwu9yltnv1mj FOREIGN KEY (contests_id) REFERENCES contestsdb.contests (id),
+    CONSTRAINT FKgnw4vv6cfwgf1xkuxcrq32hpr FOREIGN KEY (rewardTypes_id) REFERENCES contestsdb.reward_type (id)
+);
+CREATE INDEX FKfk4vhldwpv5nggwu9yltnv1mj ON contestsdb.contests_reward_type (contests_id);
+CREATE INDEX FKgnw4vv6cfwgf1xkuxcrq32hpr ON contestsdb.contests_reward_type (rewardTypes_id);
+
+-- contests_tags table
+CREATE TABLE contestsdb.contests_tags
+(
+    contests_id bigint(20) NOT NULL,
+    tags_id bigint(20) NOT NULL,
+    CONSTRAINT FKq72f48tnma75f4o5xt5p2s4d2 FOREIGN KEY (contests_id) REFERENCES contestsdb.contests (id),
+    CONSTRAINT FK572xm4w6j2hrujd1r4jpdrplv FOREIGN KEY (tags_id) REFERENCES contestsdb.tags (id)
+);
+CREATE INDEX FKq72f48tnma75f4o5xt5p2s4d2 ON contestsdb.contests_tags (contests_id);
+CREATE INDEX FK572xm4w6j2hrujd1r4jpdrplv ON contestsdb.contests_tags (tags_id);
+
+----- create triggers -----
+
 CREATE TRIGGER hashEditUpdateTrigger BEFORE UPDATE ON contests FOR EACH ROW SET new.editHash = SHA2(TO_BASE64(RANDOM_BYTES(32)), 256);
 CREATE TRIGGER hashEditInsertTrigger BEFORE INSERT ON contests FOR EACH ROW SET new.editHash = SHA2(TO_BASE64(RANDOM_BYTES(32)), 256);
 
----------------------------------------
-
+----- insert data -----
 INSERT INTO contestsdb.categories (id, name) VALUES (1, 'Konkursy muzyczne');
 INSERT INTO contestsdb.categories (id, name) VALUES (2, 'Konkursy internetowe');
 INSERT INTO contestsdb.categories (id, name) VALUES (3, 'Konkursy SMS');

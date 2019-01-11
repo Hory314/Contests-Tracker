@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 
@@ -18,34 +19,34 @@
 
     <title>:: Contests-Tracker ::</title>
 
-    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<c:url value="/images/logo.png"/>" type="image/x-icon">
 
 
     <!-- style -->
 
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
 
     <!-- style -->
 
     <!-- bootstrap -->
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
 
     <!-- responsive -->
 
-    <link href="/css/responsive.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/responsive.css"/>" rel="stylesheet" type="text/css">
 
     <!-- font-awesome -->
 
-    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 
     <!-- font-awesome -->
 
-    <link href="/css/effects/set2.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/effects/set2.css"/>" rel="stylesheet" type="text/css">
 
-    <link href="/css/effects/normalize.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/effects/normalize.css"/>" rel="stylesheet" type="text/css">
 
-    <link href="/css/effects/component.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/effects/component.css"/>" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -63,7 +64,7 @@
 
         <h1>
 
-            <a href="/"><img src="/images/logo.png" width="75"/></a>
+            <a href="<c:url value="/"/>"><img src="<c:url value="/images/logo.png"/>" width="75"/></a>
 
         </h1>
 
@@ -75,9 +76,9 @@
 
             <ul>
 
-                <li class="nav-active"><a href="/">Strona główna</a></li>
+                <li class="nav-active"><a href="<c:url value="/"/>">Strona główna</a></li>
 
-                <li><a href="/adminpanel" title="About">Ukryty panel admina</a></li>
+                <li><a href="<c:url value="/adminpanel"/>" title="About">Ukryty panel admina</a></li>
 
             </ul>
 

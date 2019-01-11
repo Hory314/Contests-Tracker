@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../template/doc_header.jsp"/>
 <h1>Panel Admina</h1>
-(<a href="/adminpanel/logout">wyloguj się</a>)
+(<a href="<c:url value="/adminpanel/logout"/>">wyloguj się</a>)
 
 <c:forEach items="${contests}" var="contest">
     <hr>
@@ -14,17 +14,17 @@
                 <td>ID</td>
                 <td>
                         ${contest.id}<br>
-                    <a href="/adminpanel/delete/${contest.id}">Usuń</a><br>
-                    <a href="/adminpanel/edit/${contest.id}">Edytuj</a>
+                    <a href="<c:url value='/adminpanel/delete/${contest.id}'/>">Usuń</a><br>
+                    <a href="<c:url value='/adminpanel/edit/${contest.id}'/>">Edytuj</a>
                 </td>
             </tr>
             <tr>
                 <td>Email</td>
                 <td>
                         ${contest.email}<br>
-                    <a href="<s:url value='/adminpanel/request-edit/${contest.id}'/>">Poproś o edycję</a>
-                    <br><a href="/contest/edit?hash=${contest.editHash}">User edit link</a>
-                    <br><a href="/activate?hash=${contest.editHash}">User accept link</a>
+                    <a href="<c:url value='/adminpanel/request-edit/${contest.id}'/>">Poproś o edycję</a>
+                    <br><a href="<c:url value="/contest/edit?hash=${contest.editHash}"/>">User edit link</a>
+                    <br><a href="<c:url value="/activate?hash=${contest.editHash}"/>">User accept link</a>
                 </td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
                 <td>Plakat</td>
                 <td>
                     <a target="_blank" href="<s:url value='${contest.image}'/>">
-                        <img width="200" src="${contest.image}">
+                        <img width="200" src="<c:url value="${contest.image}"/>">
                     </a>
                 </td>
             </tr>
